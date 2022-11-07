@@ -65,3 +65,42 @@ for (let i=1; i<=rev_height; i++) {
 console.log(rev_triangle);
 
 // question 6
+function is_prime_number (n) {
+  if (n===2 || n===3) {
+    return true;
+  } else if (n>4) {
+    const m = n%6;
+    if (m!==1 && m!==5) {
+      return false;
+    }
+    const nSqrt = Math.floor(Math.sqrt(n));
+    for (let i=5; i<=nSqrt; i+=6) {
+      if (n%i===0 || n%(i+2)===0) {
+        return false;
+      }
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+// console.log(is_prime_number(178417));
+function get_prime_number (min, max) {
+  const result = [];
+  if (min<2 && max>=2) {
+    result.push(2);
+    min = 3;
+  } else if (min%2===0) {
+    if (min===2) {
+      result.push(2);
+    }
+    min+=1;
+  }
+  for (let n=min; n<=max; ++n) {
+    if (is_prime_number(n)) {
+      result.push(n);
+    }
+  }
+  return result;
+}
+console.log(get_prime_number(1, 71791));
